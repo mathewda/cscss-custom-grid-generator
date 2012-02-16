@@ -1,0 +1,40 @@
+$num_columns: 12;
+$grid-col-width: 45px;
+$column-margin: 10px;
+$col-classes-list: ();
+$input-side-space: 8px;   /* shrink width of text boxes and textareas by amount of padding + border */
+
+@for $i from 1 through $num_columns {
+    $col-classes-list: append($col-classes-list, unquote(".g-col-#{$i}"), comma);
+    
+    .g-col-#{$i}, .g-col-#{$i} select {
+        width: $grid-col-width*$i + $column-margin*($i - 1);
+    }
+
+    .g-prefix-#{$i} {
+        width: $grid-col-width*$i + $column-margin*($i);
+    }
+
+    .g-suffix-#{$i} {
+        width: $grid-col-width*$i + $column-margin*($i + 1);
+    }
+
+    .g-col-#{$i} input, .g-col-#{$i} textarea {
+        display: block;
+        width: ($grid-col-width*$i + $column-margin*($i - 1)) - $input-side-space;
+    }
+}
+
+#{ $col-classes-list } {
+	clear: none;
+	display: inline;/* IE double margin fix. Feel free to move this to your IE specific stylesheets. */
+	float: left;
+	margin: 0 $column-margin 0 0;
+	padding-bottom: 10px;
+	position: relative;
+}
+
+#{ nth($col-classes-list, length($col-classes-list)) } {
+    margin-right: 0;
+    clear:both;
+}
